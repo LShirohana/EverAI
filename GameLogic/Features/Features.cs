@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using System.Reflection;
 
 namespace EverAI
 {
@@ -71,19 +72,46 @@ namespace EverAI
             int VerticalMovement = 0;
             int HorizontalMovement = 0;
 
+            if (pLocal.tookDamage)
+                Utility.printclosestProjectile();
+
             // If the corridor is blocked, it checks if it should move left/right.
             if (!Utility.IsCorridorOpen(pLocal.currentCorridor))
             {
+
+                Globals.MoveVertical(-1);
+
                 if (Utility.CanMoveRight())
                     HorizontalMovement = 1;
                 else if (Utility.CanMoveLeft())
                     HorizontalMovement = -1;
 
-                if (Utility.CanMoveRight() && Utility.CanMoveLeft())
-                    HorizontalMovement = UnityEngine.Random.Range(1, 2);
-                //if (Utility.CanJumpCorridor(pLocal.currentCorridor))
-                //VerticalMovement = 1;
+                if (Utility.CanJumpRight())
+                {
+                    VerticalMovement = 1;
+                    HorizontalMovement = 1;
+                }
+                else if (Utility.CanJumpLeft())
+                {
+                    VerticalMovement = 1;
+                    HorizontalMovement = -1;
+                }
+
+                //if (VerticalMovement == 0 && HorizontalMovement == 0)
+                    //VerticalMovement = -1;
             }
+
+            /*
+            if (VerticalMovement == -1)
+            {
+                Everhood.Battle.DeflectBehaviour defBehavior = UnityEngine.Object.FindObjectOfType<Everhood.Battle.DeflectBehaviour>();
+
+                MethodInfo dynMethod = defBehavior.GetType().GetMethod("Deflect", BindingFlags.NonPublic | BindingFlags.Instance);
+                if (dynMethod == null)
+                    UnityEngine.Debug.LogError("DYNMETHOD IS NULL NOOOOOOOOO");
+
+                dynMethod.Invoke(defBehavior, new object[] { });
+            }*/
 
             // Simultaneously, it'll jump at all times, if it can.
             if (Utility.ShouldJump())

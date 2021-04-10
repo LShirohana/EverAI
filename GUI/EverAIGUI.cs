@@ -57,7 +57,7 @@ namespace EverAI
             Rewired.Player pLocalInput = Rewired.ReInput.players.GetPlayer(0);
             string vertaxis = "Vertical Axis Input: " + pLocalInput.GetAxis("VerticalBattle");
             string horiaxis = "Horizontal Axis Input: " + pLocalInput.GetAxis("HorizontalBattle");
-            UIHelper.DrawOutline(new UnityEngine.Rect(180, 80, 400, 90), vertaxis + " " + horiaxis, EverAIGUI.boldtext);
+            UIHelper.DrawOutline(new UnityEngine.Rect(180, 80, 400, 90), vertaxis + "\n" + horiaxis, EverAIGUI.boldtext);
 
             //this.battlePlayer.transform.localPosition + this.offsets[this.battlePlayer.currentCorridor] -> True screen position.
 
