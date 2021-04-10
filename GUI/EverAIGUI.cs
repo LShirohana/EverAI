@@ -42,7 +42,7 @@ namespace EverAI
 
         public static void DrawVisuals()
         {
-            UIHelper.DrawOutline(new UnityEngine.Rect(580, 10, 200, 40), "Ever AI V0.1", boldtext);
+            UIHelper.DrawOutline(new UnityEngine.Rect(580, 10, 200, 40), "Ever AI V0.2", boldtext);
 
             Everhood.Battle.BattlePlayer pLocal = Globals.GetLocalPlayer();
             if (pLocal == null)
